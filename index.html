@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Baralho</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    
+  </head>
+  <body>
+    <script type="text/javascript">
+
+        var pesquisa = "baralho";
+    
+        $(document).ready(function(){
+    
+            $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+            {
+                tags: pesquisa ,
+                tagmode: "any",
+                format: "json"
+            },
+            function(data) {
+                var rnd = Math.floor(Math.random() * data.items.length);
+    
+                var image_src = data.items[rnd]['media']['m'].replace("_m", "_b");
+    
+                $('body').css('background-image', "url('" + image_src + "')");
+    
+            });
+    
+        });
+        </script>
+</html>
